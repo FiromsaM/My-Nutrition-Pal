@@ -1,0 +1,36 @@
+<%- include('partials/header') -%>
+
+  
+    <div >
+      <ul>
+        <% for(let i=0; i<post.length; i++) {%>
+          <div class="card card-compact w-96 bg-base-100 shadow-xl">
+            <li>
+              <figure>
+                <a href="/post/<%= post[i]._id%>">
+                  <img class="img-fluid" src="<%= post[i].image%>">
+                </a>
+              </figure>
+              <div class="card-body">
+              <h2 class="card-title font-bold"><%= post[i].userName%></h2>
+              <p><%= post[i].caption%></p>
+              <div class="card-actions justify-end">
+                
+                <button class="btn btn-primary"><a href="/post/<%= post[i]._id%>">... more</button>
+              </div>
+            </div>
+            </li>
+          </div>
+        <% } %>
+      </ul>
+    </div>
+
+
+
+  <div class="container">
+    <div class="text-center">
+      <a class="btn btn-primary" href="/profile">Return to Profile</a>
+      <a class="btn btn-primary" href="/logout">Logout</a>
+    </div>
+  </div>
+<%- include('partials/footer') -%>

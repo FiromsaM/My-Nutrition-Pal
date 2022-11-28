@@ -1,0 +1,66 @@
+<%- include('partials/header') -%>
+
+<div class="card lg:card-side bg-base-100 shadow-xl">
+  <figure><img src="<%= post.image%>" alt="Album"/></figure>
+  <div class="card-body">
+    <h1 class="card-title"><%= user.userName%></h1>
+    <div class="card w-96 bg-base-100 shadow-xl">
+        <p><%= post.caption %></p>
+    </div>
+
+    <div class="card comment-carousel carousel carousel-vertical w-96 bg-base-100 shadow-xl">
+      <div class="carousel-item">
+        <ul>
+          <% for(let i=0; i<comment.length; i++) {%>
+            <li class="">
+              <p>
+                <span class="font-bold"><%= comment[i].user%></span><%=comment[i].comment%>
+              </p>
+              <div>
+                <%if(comment[i].userId == user.id){ %>
+                
+                 <p><%= comment[i]._id %> </p>
+                 <form action="/comment/deleteComment/<%=comment[i]._id%>?_method=DELETE" method="POST">
+                  <button class="btn btn-primary fas fa-trash" ></button>
+                </form>
+             
+                <%}%>
+              </div>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+    <div class="card-actions">
+      <div class="">
+        <form action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+          <button class="btn-circle btn-primary fas fa-heart"></button>
+        </form>
+        <h3 class="bordered">Liked: <%= post.likes %></h3>
+      </div>
+      <div>
+        <%if(post.user == user.id){ %>
+        <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST">
+          <button class="btn btn-primary fas fa-trash" ></button>
+        </form>
+        <%}%>
+      </div>
+    </div>
+    <div class="">
+      <form action="/comment/createComment/<%=post.id%>"  method="POST">
+        <div class="mb-3">
+            <input type="text" class="input input-bordered w-full max-w-xs" placeholder="Add a comment..." id="comment" name="comment">
+            <button type="submit" class="badge btn-ghost" >post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="text-center">
+    <a class="btn btn-primary" href="/profile">Return to Profile</a>
+    <a class="btn btn-primary" href="/feed">Return to Feed</a>
+  </div>
+</div>
+
+<%- include('partials/footer') -%>
