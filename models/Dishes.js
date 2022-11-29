@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-const PostSchema = new mongoose.Schema({
-    title: {
+const DishSchema = new mongoose.Schema({
+    dishName: {
         type: String,
         required: true,
       },
@@ -13,21 +13,17 @@ const PostSchema = new mongoose.Schema({
         type: String,
         require: true,
       },
-      caption: {
+      dishType: {
         type: String,
         required: true,
       },
-      likes: {
-        type: Number,
+      mealType: {
+        type: String,
         required: true,
       },
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-      userName: {
-        type: mongoose.Schema.Types.String,
-        ref: "User",
+      nutritionalData: {
+        type: mongoose.Schema.Types.Number,
+        ref: "Ingredients",
       },
       createdAt: {
         type: Date,
@@ -35,4 +31,4 @@ const PostSchema = new mongoose.Schema({
       },
 })
 
-module.exports = mongoose.model('Post', PostSchema)
+module.exports = mongoose.model('Dish', DishSchema)
